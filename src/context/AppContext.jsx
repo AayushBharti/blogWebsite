@@ -15,6 +15,7 @@ export default function AppContextProvider({ children }) {
     setLoading(true);
 
     let url = `${baseUrl}?page=${page}`;
+    console.log(url)
 
     try {
       const result = await fetch(url);
