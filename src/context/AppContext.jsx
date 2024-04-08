@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { baseUrl } from "../baseUrl";
 import { useNavigate } from "react-router";
+import PropTypes from "prop-types";
 
 //step-1 - context creation
 export const AppContext = createContext();
@@ -60,6 +61,10 @@ export default function AppContextProvider({ children }) {
     setTotalPages,
     fetchBlogPosts,
     handlePageChange,
+  };
+
+  AppContextProvider.propTypes = {
+    children: PropTypes.node.isRequired,
   };
 
   //step-2 - context providing
