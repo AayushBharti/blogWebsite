@@ -1,27 +1,35 @@
 import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
 
 const Card = ({ post }) => {
   return (
     <div className="mt-6 ">
-      <div>
+      <NavLink to={`/blog/${post.id}`}>
         <p className="font-bold">{post.title}</p>
-        <p>
-          By <span className="italic">{post.author}</span> on <span className="font-semibold underline">{post.category}</span>
-        </p>
-        <p>
-          Posted on <span>{post.date}</span>
-        </p>
-        <p className="mt-2">{post.content}</p>
-        <div>
-          {post.tags.map((tag, index) => {
-            return (
-              <span
-                className="underline text-blue-700 font-semibold mr-2"
-                key={index}
-              >{`#${tag.toLowerCase()} `}</span>
-            );
-          })}
-        </div>
+      </NavLink>
+      <p>
+        By <span className="italic">{post.author}</span> on
+        <NavLink to={`/categories/${post.category.replaceAll(" ", "-")}`}>
+          <span className="font-semibold underline">{post.category}</span>
+        </NavLink>
+      </p>
+
+      <p>
+        Posted on <span>{post.date}</span>
+      </p>
+
+      <p className="mt-2">{post.content}</p>
+
+      <div>
+        {post.tags.map((tag, index) => {
+          return (
+            <NavLink key={index} to={`/tags/${tag.replaceAll(" ", "-")}`}>
+              <span className="underline text-blue-700 font-semibold mr-2">
+                {`#${tag.toLowerCase()} `}
+              </span>
+            </NavLink>
+          );
+        })}
       </div>
     </div>
   );
@@ -30,6 +38,7 @@ const Card = ({ post }) => {
 //it was giving some red marks with out them, so added it using chapGpt
 Card.propTypes = {
   post: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,

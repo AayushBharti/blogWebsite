@@ -15,8 +15,8 @@ const Blogs = () => {
       ) : posts.length === 0 ? (
         <div>No Post Found</div>
       ) : (
-        posts.map((post,index) => (
-            <Card key={index} post={post}/>
+        posts.map((post) => (
+            <Card key={post.id} post={post}/>
         ))
       )}
     </div>
